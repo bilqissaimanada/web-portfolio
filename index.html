@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio | macOS Style</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display",
+                         "Segoe UI", sans-serif;
+            background:
+                radial-gradient(circle at 20% 20%, #123b69 0%, transparent 35%),
+                radial-gradient(circle at 80% 80%, #061a31 0%, transparent 40%),
+                linear-gradient(135deg, #02050a, #061525, #000000);
+            color: white;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* ===== BACKGROUND ===== */
+        .orb {
+            position: fixed;
+            width: 250px;
+            height: 250px;
+            border-radius: 50%;
+            background: rgba(0, 119, 255, 0.15);
+            filter: blur(70px);
+            animation: floating 8s infinite alternate ease-in-out;
+            z-index: -1;
+        }
+
+        .orb.one {
+            top: 10%;
+            left: 5%;
+        }
+
+        .orb.two {
+            right: 5%;
+            bottom: 10%;
+            animation-delay: 2s;
+        }
+
+        @keyframes floating {
+            from {
+                transform: translateY(0) translateX(0);
+            }
+            to {
+                transform: translateY(-60px) translateX(40px);
+            }
+        }
+
+        /* ===== NAVBAR ===== */
+        nav {
+            position: fixed;
+            top: 15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 92%;
+            max-width: 1100px;
+            padding: 14px 22px;
+            background: rgba(10, 18, 30, 0.65);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255,255,255,0.12);
+            border-radius: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.4);
+        }
+
+        .logo {
+            font-weight: 700;
+            font-size: 20px;
+            letter-spacing: 1px;
+        }
+
+        .logo span {
+            color: #4da3ff;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 20px;
+        }
+
+        nav a {
+            color: #ddd;
+            text-decoration: none;
+            font-size: 14px;
+            transition: 0.3s;
+        }
+
+        nav a:hover {
+            color: #4da3ff;
+        }
+
+        /* ===== MAC WINDOW ===== */
+        .mac-window {
+            width: 90%;
+            max-width: 1100px;
+            margin: 130px auto 60px;
+            background: rgba(10, 17, 28, 0.72);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+            border: 1px solid rgba(255,255,255,0.12);
+            border-radius: 25px;
+            overflow: hidden;
+            box-shadow: 0 30px 80px rgba(0,0,0,0.5);
+        }
+
+        .window-top {
+            height: 48px;
+            background: rgba(255,255,255,0.06);
+            display: flex;
+            align-items: center;
+            padding: 0 18px;
+            gap: 8px;
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+        }
+
+        .dot {
+            width: 13px;
+            height: 13px;
+            border-radius: 50%;
+        }
+
+        .red {
+            background: #ff5f57;
+        }
+
+        .yellow {
+            background: #ffbd2e;
+        }
+
+        .green {
+            background: #28c840;
+        }
+
+        .window-title {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            color: #aaa;
+            font-size: 13px;
+        }
+
+        /* ===== SECTION ===== */
+        section {
+            padding: 90px 8%;
+            min-height: 80vh;
+        }
+
+        /* ===== HOME ===== */
+        .home {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 50px;
+        }
+
+        .home-text {
+            flex: 1;
+        }
+
+        .home-text small {
+            color: #62adff;
+            font-size: 16px;
+        }
+
+        .home-text h1 {
+            font-size: clamp(45px, 7vw, 80px);
+            margin: 12px 0;
+            line-height: 1;
+            background: linear-gradient(90deg, #fff, #4da3ff);
+            -webkit-background-clip: text;
+            color: transparent;
+        }
+
+        .home-text p {
+            color: #aaa;
+            line-height: 1.8;
+            max-width: 550px;
+        }
+
+        .button {
+            display: inline-block;
+            margin-top: 25px;
+            padding: 13px 25px;
+            border-radius: 14px;
+            background: linear-gradient(135deg, #1479ff, #00458f);
+            color: white;
+            text-decoration: none;
+            box-shadow: 0 10px 30px rgba(0,100,255,0.25);
+            transition: 0.3s;
+        }
+
+        .button:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 15px 40px rgba(0,100,255,0.45);
+        }
+
+        /* ===== FOTO ===== */
+        .photo-box {
+            width: 310px;
+            height: 310px;
+            border-radius: 35px;
+            padding: 8px;
+            background: linear-gradient(135deg, #1677ff, #06172d, #000);
+            box-shadow: 0 25px 70px rgba(0,100,255,0.3);
+            animation: photoFloat 4s ease-in-out infinite;
+        }
+
+        .photo-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 28px;
+            display: block;
+        }
+
+        @keyframes photoFloat {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-12px);
+            }
+        }
+
+        /* ===== TITLE ===== */
+        .section-title {
+            text-align: center;
+            font-size: 40px;
+            margin-bottom: 45px;
+        }
+
+        .section-title span {
+            color: #4da3ff;
+        }
+
+        /* ===== CARDS ===== */
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+        }
+
+        .card {
+            background: rgba(255,255,255,0.055);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 22px;
+            padding: 28px;
+            backdrop-filter: blur(15px);
+            transition: 0.4s;
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(77,163,255,0.5);
+            box-shadow: 0 20px 50px rgba(0,100,255,0.15);
+        }
+
+        .card h3 {
+            margin-bottom: 12px;
+            color: #62adff;
+        }
+
+        .card p {
+            color: #aaa;
+            line-height: 1.7;
+        }
+
+        /* ===== SKILLS ===== */
+        .skill {
+            margin-bottom: 25px;
+        }
+
+        .skill-name {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+        }
+
+        .bar {
+            height: 9px;
+            border-radius: 20px;
+            background: #101b2a;
+            overflow: hidden;
+        }
+
+        .progress {
+            height: 100%;
+            border-radius: 20px;
+            background: linear-gradient(90deg, #0066ff, #55baff);
+            animation: loading 2s ease;
+        }
+
+        .html { width: 90%; }
+        .css { width: 85%; }
+        .js { width: 75%; }
+        .design { width: 80%; }
+
+        @keyframes loading {
+            from {
+                width: 0;
+            }
+        }
+
+        /* ===== EXPERIENCE ===== */
+        .timeline {
+            border-left: 2px solid #1d6fd8;
+            padding-left: 30px;
+        }
+
+        .timeline-item {
+            margin-bottom: 35px;
+            position: relative;
+        }
+
+        .timeline-item::before {
+            content: "";
+            position: absolute;
+            width: 13px;
+            height: 13px;
+            background: #3d9cff;
+            border-radius: 50%;
+            left: -38px;
+            top: 5px;
+            box-shadow: 0 0 20px #1681ff;
+        }
+
+        .timeline-item h3 {
+            color: #62adff;
+        }
+
+        .timeline-item p {
+            color: #aaa;
+            margin-top: 8px;
+            line-height: 1.7;
+        }
+
+        /* ===== CONTACT ===== */
+        .contact-box {
+            max-width: 650px;
+            margin: auto;
+            text-align: center;
+        }
+
+        .contact-box p {
+            color: #aaa;
+            line-height: 1.8;
+        }
+
+        .contact-list {
+            margin-top: 30px;
+            display: grid;
+            gap: 15px;
+        }
+
+        .contact-item {
+            padding: 17px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 15px;
+            border: 1px solid rgba(255,255,255,0.08);
+        }
+
+        /* ===== FOOTER ===== */
+        footer {
+            text-align: center;
+            padding: 30px;
+            color: #777;
+            border-top: 1px solid rgba(255,255,255,0.08);
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 750px) {
+
+            nav {
+                padding: 12px 15px;
+            }
+
+            nav ul {
+                display: none;
+            }
+
+            .home {
+                flex-direction: column-reverse;
+                text-align: center;
+            }
+
+            .home-text p {
+                margin: auto;
+            }
+
+            .photo-box {
+                width: 240px;
+                height: 240px;
+            }
+
+            section {
+                padding: 70px 7%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="orb one"></div>
+    <div class="orb two"></div>
+
+    <!-- NAVBAR -->
+    <nav>
+        <div class="logo">My<span>Portfolio</span></div>
+
+        <ul>
+            <li><a href="#home">Beranda</a></li>
+            <li><a href="#profil">Profil</a></li>
+            <li><a href="#keahlian">Keahlian</a></li>
+            <li><a href="#pengalaman">Pengalaman</a></li>
+            <li><a href="#kontak">Kontak</a></li>
+        </ul>
+    </nav>
+
+
+    <!-- MACOS WINDOW -->
+    <main class="mac-window">
+
+        <div class="window-top">
+            <div class="dot red"></div>
+            <div class="dot yellow"></div>
+            <div class="dot green"></div>
+
+            <div class="window-title">
+                Portfolio — macOS
+            </div>
+        </div>
+
+
+        <!-- BERANDA -->
+        <section class="home" id="home">
+
+            <div class="home-text">
+                <small>👋 Halo, saya</small>
+
+                <h1>Bilqis saima nada </h1>
+
+                <p>
+                    Selamat datang di website portofolio saya.
+                    Saya seorang pelajar yang tertarik dengan teknologi,
+                    desain, coding, dan dunia digital.
+                </p>
+
+                <a href="#profil" class="button">
+                    Lihat Profil →
+                </a>
+            </div>
+
+
+            <div class="photo-box">
+                <!-- GANTI FOTO DI SINI -->
+                <img src="Bilqis.png" alt="Foto Profil">
+            </div>
+
+        </section>
+
+
+        <!-- PROFIL -->
+        <section id="profil">
+
+            <h2 class="section-title">
+                Pro<span>fil</span>
+            </h2>
+
+            <div class="cards">
+
+                <div class="card">
+                    <h3>👤 Tentang Saya</h3>
+                    <p>
+                        Saya adalah seorang pelajar yang suka belajar
+                        hal baru terutama dalam bidang teknologi dan
+                        desain website.
+                    </p>
+                </div>
+
+                <div class="card">
+                    <h3>🎯 Tujuan</h3>
+                    <p>
+                        Mengembangkan kemampuan coding, desain,
+                        kreativitas, dan membuat berbagai project digital.
+                    </p>
+                </div>
+
+                <div class="card">
+                    <h3>💻 Minat</h3>
+                    <p>
+                        Web development, UI/UX, desain digital,
+                        animasi, dan teknologi.
+                    </p>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- KEAHLIAN -->
+        <section id="keahlian">
+
+            <h2 class="section-title">
+                Ke<span>ahlian</span>
+            </h2>
+
+            <div class="card">
+
+                <div class="skill">
+                    <div class="skill-name">
+                        <span>HTML</span>
+                        <span>90%</span>
+                    </div>
+                    <div class="bar">
+                        <div class="progress html"></div>
+                    </div>
+                </div>
+
+                <div class="skill">
+                    <div class="skill-name">
+                        <span>CSS</span>
+                        <span>85%</span>
+                    </div>
+                    <div class="bar">
+                        <div class="progress css"></div>
+                    </div>
+                </div>
+
+                <div class="skill">
+                    <div class="skill-name">
+                        <span>JavaScript</span>
+                        <span>75%</span>
+                    </div>
+                    <div class="bar">
+                        <div class="progress js"></div>
+                    </div>
+                </div>
+
+                <div class="skill">
+                    <div class="skill-name">
+                        <span>UI / UX Design</span>
+                        <span>80%</span>
+                    </div>
+                    <div class="bar">
+                        <div class="progress design"></div>
+                    </div>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- PENGALAMAN -->
+        <section id="pengalaman">
+
+            <h2 class="section-title">
+                Peng<span>alaman</span>
+            </h2>
+
+            <div class="timeline">
+
+                <div class="timeline-item">
+                    <h3>2026 — Website Portfolio</h3>
+                    <p>
+                        Membuat website portofolio pribadi menggunakan
+                        HTML, CSS, dan JavaScript dengan desain modern
+                        bergaya macOS.
+                    </p>
+                </div>
+
+                <div class="timeline-item">
+                    <h3>2026 — Project Sekolah</h3>
+                    <p>
+                        Mengikuti berbagai kegiatan dan project sekolah
+                        yang berkaitan dengan teknologi dan informatika.
+                    </p>
+                </div>
+
+                <div class="timeline-item">
+                    <h3>2025 — Belajar Coding</h3>
+                    <p>
+                        Mulai mempelajari dasar HTML, CSS, JavaScript,
+                        serta membuat berbagai halaman website.
+                    </p>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- KONTAK -->
+        <section id="kontak">
+
+            <h2 class="section-title">
+                Kon<span>tak</span>
+            </h2>
+
+            <div class="contact-box">
+
+                <p>
+                    Jika ingin menghubungi saya, silakan melalui
+                    informasi di bawah ini.
+                </p>
+
+                <div class="contact-list">
+
+                    <div class="contact-item">
+                         bilqissaimanada9@gmail.com
+                    </div>
+
+                    <div class="contact-item">
+                     Instragram:qiss_s06        
+                    </div>
+
+                    <div class="contact-item">
+                        💬 WhatsApp: 08xxxxxxxxxx
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <footer>
+            © 2026 My Portfolio — macOS Style
+        </footer>
+
+    </main>
+
+</body>
+</html>
